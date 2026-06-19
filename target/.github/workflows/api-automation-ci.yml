@@ -1,0 +1,39 @@
+name: Enterprise API Regression Suite CI
+
+# Trigger test suite execution automatically on any git push or pull request to the main branch
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: # Allows manual button-click triggers from GitHub UI
+
+jobs:
+  automation-execution:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository code inside the GitHub runner container
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # Step 2: Set up a headless Java Development Kit (JDK 17) environment
+    - name: Set Up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    # Step 3: Compile and run Cucumber tests using Maven
+    - name: Run RestAssured Automated Regression Suite
+      run: mvn clean test
+
+    # Step 4: Archive and upload the generated Cucumber HTML Report artifact
+    - name: Publish Test Execution Report HTML
+      if: always() # Ensures reports are generated even if tests fail
+      uses: actions/upload-artifact@v4
+      with:
+        name: cucumber-html-reports
+        path: target/cucumber-reports/
+        retention-days: 7
