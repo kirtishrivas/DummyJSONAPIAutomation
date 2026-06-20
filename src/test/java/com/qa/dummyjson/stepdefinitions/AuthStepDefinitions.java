@@ -127,7 +127,7 @@ public class AuthStepDefinitions {
     public void the_response_payload_data_structure_must_strictly_match_the_contract(String schemaFileName) {
         // Asserting the whole response payload structure against the JSON schema template file
         response.then().assertThat()
-                .body(io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/" + schemaFileName));
+                .body(io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath("Schemas/" + schemaFileName));
         
         System.out.println("📄 Contract Validation Passed! JSON Response structure matches " + schemaFileName + " perfectly.");
     }
