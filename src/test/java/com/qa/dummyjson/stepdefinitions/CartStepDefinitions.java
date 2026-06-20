@@ -99,7 +99,7 @@ public class CartStepDefinitions {
     @Then("the cart response payload data structure must strictly match the {string} contract")
     public void the_response_payload_data_structure_must_strictly_match_the_contract(String schemaFileName) {
         response.then().assertThat()
-                .body(io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath("schemas/" + schemaFileName));
+                .body(io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath("Schemas/" + schemaFileName));
         
         System.out.println("🛒 Cart Contract Validation Passed! Structural fields match " + schemaFileName + " completely.");
     }
