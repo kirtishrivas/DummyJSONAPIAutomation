@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources/features",      // Feature files ka path
+    features = "src/test/resources/Features",      // Feature files ka path
     glue = "com.qa.dummyjson.stepdefinitions",     // Step implementation classes ka package
     		tags = "@DummyJSON",                              // Sirf wahi tests chalenge jisme yeh tag hai
     plugin = {
